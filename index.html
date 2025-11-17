@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopwatch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2>00:00:00</h2>
+        <div class="controls">
+            <div onclick="watchstop()"><i class="fa-solid fa-stop"></i></div>
+            <div onclick="watchstart()"><i class="fa-solid fa-play"></i></div>
+            <div onclick="watchreset()"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+
+        </div>
+    </div>
+
+
+
+
+    <script>
+        let[hours, minutes , seconds] = [ 0 , 0, 0];
+        let play = document.querySelector('.fa-play');
+        let head = document.querySelector('h2');
+        let timer = null;
+
+        function stopwatch(){
+            seconds++;
+            if (seconds == 60){
+                seconds= 0;
+                minutes++;
+                if(minutes == 60){
+                    minutes =0;
+                    hours++;
+                }
+
+            }
+            let h = hours<10?"0"+ hours : hours;
+            let m = minutes<10?"0"+ minutes : minutes;
+            let s = seconds<10?"0"+ seconds : seconds;
+            head.innerText= h+":"+m+":"+s;
+
+        }
+        function watchstart(){
+            if(timer!==null){
+                clearInterval(timer);
+            }
+            timer=setInterval(stopwatch,1000);
+        }
+        function watchstop(){
+            clearInterval(timer);
+        }
+        function watchreset(){
+            clearInterval(timer);
+            [hours, minutes , seconds] = [ 0 , 0, 0];
+            head.innerText="00:00:00";
+        }
+
+
+
+    </script>
+</body>
+</html>
