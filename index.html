@@ -13,7 +13,7 @@
         <h2>00:00:00</h2>
         <div class="controls">
             <div onclick="watchstop()"><i class="fa-solid fa-stop"></i></div>
-            <div onclick="watchstart()"><i class="fa-solid fa-play"></i></div>
+            <div onclick="watchstart()" ><i class="fa-solid fa-play" id="play"></i></div>
             <div onclick="watchreset()"><i class="fa-solid fa-arrow-rotate-left"></i></div>
 
         </div>
@@ -24,7 +24,7 @@
 
     <script>
         let[hours, minutes , seconds] = [ 0 , 0, 0];
-        let play = document.querySelector('.fa-play');
+        let play = document.querySelector('#play');
         let head = document.querySelector('h2');
         let timer = null;
 
@@ -50,14 +50,21 @@
                 clearInterval(timer);
             }
             timer=setInterval(stopwatch,1000);
+            play.classList.remove("fa-play");
+            play.classList.add("fa-pause");
+
         }
         function watchstop(){
             clearInterval(timer);
+             play.classList.add("fa-play");
+            play.classList.remove("fa-pause");
         }
         function watchreset(){
             clearInterval(timer);
             [hours, minutes , seconds] = [ 0 , 0, 0];
             head.innerText="00:00:00";
+             play.classList.add("fa-play");
+            play.classList.remove("fa-pause");
         }
 
 
